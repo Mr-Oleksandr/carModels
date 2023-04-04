@@ -1,0 +1,33 @@
+.create-card__options{
+    display: flex;
+    gap: 25px;
+    margin-bottom: 10px;
+}
+.create-card-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.create-card__list{
+    border: 1px solid black;
+    width: 100%;
+    max-height: 500px;
+    min-height: 200px;
+    overflow: auto;
+    padding: 0;
+    margin: 25px 0px 0px 0px;
+}
+.create-card__group-btn{
+    gap: 25px;
+    display: flex;
+    justify-content: flex-end;
+}
+.create-card__options-select{
+    width: 250px;
+}
+
+.create-card__mileage{
+    height: 40px;
+    width: 99%;
+}

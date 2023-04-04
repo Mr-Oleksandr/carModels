@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import './index.css'
+import App from './App'
+import '@avtopro/button/dist/style.css'
+import '@avtopro/text-input/dist/style.css'
+import '@avtopro/select/dist/style.css'
+import '@avtopro/modal/dist/style.css'
+import '@avtopro/slider/dist/style.css'
+import '@avtopro/item-card/dist/style.css'
+import { RootStoreContext } from './context/modelContext'
+import Model from './model/index'
+import { Auth } from './context/contextAuth'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
+const model = new Model()
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  <BrowserRouter>
+    <Auth>
+      <RootStoreContext.Provider value={{ model }}>
+        <App />
+      </RootStoreContext.Provider>
+    </Auth>
+  </BrowserRouter>
+)

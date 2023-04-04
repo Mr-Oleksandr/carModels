@@ -1,0 +1,26 @@
+.search {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.search__container {
+    width: 100%;
+    display: flex;
+    gap: 25px;
+}
+
+.search__group {
+    display: flex;
+    margin-right: 20px;
+}
+
+.search__filter-btn {
+    border: 1px solid black;
+    color: black;
+    background-color: transparent;
+}
+
+.search__filter{
+    width: 100%;
+}

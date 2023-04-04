@@ -1,0 +1,13 @@
+.filter__container{
+margin-top: 10px;
+display: flex;
+align-items: center;
+gap: 25px;
+justify-content: center;
+}
+.filter__container__slider{
+    width: 200px;
+}
+.filter__container__select{
+    width: 200px;
+}
