@@ -43,7 +43,7 @@ const Search = () => {
       <div className="search__container">
         <div className="search__filter">
           <div className="search__group pro-btn-group">
-            <TextInput onChange={(e) => setSearchTerm(e.target.value)} />
+            <TextInput onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search Model" />
             <Button theme="blue" onClick={openModel}>
               <Plus />
             </Button>

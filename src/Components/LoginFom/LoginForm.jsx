@@ -1,6 +1,7 @@
 /* eslint-disable no-constant-condition */
 import React, { useContext } from 'react'
 import TextInput from '@avtopro/text-input/dist/index'
+import Alert from '@avtopro/alert/dist/index'
 import Button from '@avtopro/button/dist/index'
 import { useState } from 'react'
 import { contextAuth } from '../../context/contextAuth'
@@ -50,9 +51,12 @@ const LoginForm = () => {
     <div className="login__container">
       <h5>
         {modelUser.state === 'error' ? (
-          <span onClick={() => setRegistration(true)}>
-            email or password is incorrect <div style={{ color: 'blue' }}>...Registration</div>
-          </span>
+          <Alert>
+            <div style={{ marginRight: '10px' }}>email or password is incorrect</div> <br />
+            <Button theme="prime" onClick={() => setRegistration(true)}>
+              Registration
+            </Button>
+          </Alert>
         ) : null}
       </h5>
       {registration ? (

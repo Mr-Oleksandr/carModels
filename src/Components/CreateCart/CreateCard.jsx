@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { nanoid } from 'nanoid'
+import { Progress, Step } from '@avtopro/progress/dist/index'
 import Button from '@avtopro/button/dist/index'
 import NumberInput from '@avtopro/number-input/dist/index'
 import RobotPreloader from '@avtopro/preloader/dist/index'
+
 import { observer } from 'mobx-react-lite'
 import './CreateCard.css'
 import Plus from '../../asstes/icons/Plus'
@@ -33,7 +35,7 @@ const CreateCard = ({ setShowModal }) => {
     groupName: '',
     subGroupName: ''
   })
-  const [partCount, setCount] = useState(1)
+  const [partCount, setCount] = useState(0)
   const [carInfo, setCarInfo] = useState({ parts: [] })
   const [part, setPart] = useState({})
 
@@ -95,63 +97,76 @@ const CreateCard = ({ setShowModal }) => {
     return <RobotPreloader />
   }
 
+  console.log(part)
   return (
     <form className="create-card" onSubmit={createCar}>
-      <h1>New List</h1>
+      <h3>New List</h3>
       <hr />
-      <div className="create-card__options">
-        <SelectModelName setValue={setValue} modelCar={modelCar} />
-        <SelectModelYears setValue={setValue} value={value} />
-      </div>
-      <div className="create-card__options">
-        <SelectModelEquipment setValue={setValue} value={value} />
-        <SelectModelComplectation setValue={setValue} value={value} />
-      </div>
-      <hr />
-      <div className="create-card__options">
-        <SelectModelGroupe setValue={setValue} value={value} />
-        <SelectModelSubGroupe setValue={setValue} value={value} />
-      </div>
-      <div className="create-card__options">
-        <SelectModelParts setPart={setPart} partCount={partCount} />
-      </div>
-      <NumberInput
-        className="create-card__mileage"
-        placeholder="mileage"
-        type="number"
-        onChange={handleMilage}
-        value={value.mileage}
-        min={1}
-      />
-      <div className="create-card-btn">
-        <NumberInput
-          placeholder="count"
-          type="number"
-          onChange={handleCount}
-          value={partCount}
-          min={1}
-        />
-        <Button className="search__filter-btn" theme="blue" onClick={addCarInfo}>
-          <Plus />
-        </Button>
-      </div>
-      <ul className="create-card__list">
-        {carInfo.parts.map((item) => {
-          return (
-            <li key={nanoid()}>
-              {item.tree} ({item.partCount})
-            </li>
-          )
-        })}
-      </ul>
-      <hr />
-      <div className="create-card__group-btn">
-        <Button className="search__filter-btn" theme="blue">
-          Cancel
-        </Button>
-        <Button className="search__filter-btn" theme="blue">
-          Create
-        </Button>
+      <div className="create-card_content">
+        <div>
+          <Progress>
+            <Step isCompleted={value.modelName ? true : false}>Select Model</Step>
+            <Step isCompleted={Object.keys(part).length ? true : false}>Select Parts</Step>
+            <Step isCompleted={partCount ? true : false}>Select Count</Step>
+            <Step isCompleted={carInfo.parts.length ? true : false}>Add Part in List</Step>
+          </Progress>
+        </div>
+        <div>
+          <div className="create-card__options">
+            <SelectModelName setValue={setValue} modelCar={modelCar} />
+            <SelectModelYears setValue={setValue} value={value} />
+          </div>
+          <div className="create-card__options">
+            <SelectModelEquipment setValue={setValue} value={value} />
+            <SelectModelComplectation setValue={setValue} value={value} />
+          </div>
+          <hr />
+          <div className="create-card__options">
+            <SelectModelGroupe setValue={setValue} value={value} />
+            <SelectModelSubGroupe setValue={setValue} value={value} />
+          </div>
+          <div className="create-card__options">
+            <SelectModelParts setPart={setPart} partCount={partCount} />
+          </div>
+          <NumberInput
+            className="create-card__mileage"
+            placeholder="mileage"
+            type="number"
+            onChange={handleMilage}
+            value={value.mileage}
+            min={1}
+          />
+          <div className="create-card-btn">
+            <NumberInput
+              placeholder="count"
+              type="number"
+              onChange={handleCount}
+              value={partCount}
+              min={1}
+            />
+            <Button className="search__filter-btn" theme="blue" onClick={addCarInfo}>
+              <Plus />
+            </Button>
+          </div>
+          <ul className="create-card__list">
+            {carInfo.parts.map((item) => {
+              return (
+                <li key={nanoid()}>
+                  {item.tree} ({item.partCount})
+                </li>
+              )
+            })}
+          </ul>
+          <hr />
+          <div className="create-card__group-btn">
+            <Button className="search__filter-btn" theme="blue">
+              Cancel
+            </Button>
+            <Button className="search__filter-btn" theme="blue">
+              Create
+            </Button>
+          </div>
+        </div>
       </div>
     </form>
   )

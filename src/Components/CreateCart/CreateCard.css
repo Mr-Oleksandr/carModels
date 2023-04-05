@@ -8,7 +8,9 @@
     justify-content: center;
     margin-top: 25px;
 }
-
+.modwin{
+    width: 600px;
+}
 .create-card__list{
     border: 1px solid black;
     width: 100%;
