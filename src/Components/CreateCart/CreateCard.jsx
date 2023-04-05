@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { nanoid } from 'nanoid'
 import Button from '@avtopro/button/dist/index'
+import NumberInput from '@avtopro/number-input/dist/index'
+import RobotPreloader from '@avtopro/preloader/dist/index'
 import { observer } from 'mobx-react-lite'
 import './CreateCard.css'
 import Plus from '../../asstes/icons/Plus'
@@ -90,7 +92,7 @@ const CreateCard = ({ setShowModal }) => {
   }
 
   if (modelCar.state === 'loading') {
-    return <div>Loading</div>
+    return <RobotPreloader />
   }
 
   return (
@@ -113,7 +115,7 @@ const CreateCard = ({ setShowModal }) => {
       <div className="create-card__options">
         <SelectModelParts setPart={setPart} partCount={partCount} />
       </div>
-      <input
+      <NumberInput
         className="create-card__mileage"
         placeholder="mileage"
         type="number"
@@ -122,7 +124,13 @@ const CreateCard = ({ setShowModal }) => {
         min={1}
       />
       <div className="create-card-btn">
-        <input placeholder="count" type="number" onChange={handleCount} value={partCount} min={1} />
+        <NumberInput
+          placeholder="count"
+          type="number"
+          onChange={handleCount}
+          value={partCount}
+          min={1}
+        />
         <Button className="search__filter-btn" theme="blue" onClick={addCarInfo}>
           <Plus />
         </Button>

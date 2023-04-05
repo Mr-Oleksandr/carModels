@@ -149,7 +149,7 @@ class ModelCar {
   async createCarCard(data) {
     try {
       this.state = 'loading'
-      await this.modelService.createCarCard(data)
+      const { carCard } = await this.modelService.createCarCard(data)
       const { carCards } = await this.modelService.getAllCarCard()
       const minValue = carCards.reduce((acc, value) => {
         acc[0] = acc[0] === undefined || value.mileage < acc[0] ? value.mileage : acc[0]
@@ -157,7 +157,7 @@ class ModelCar {
         return acc
       }, [])
       runInAction(() => {
-        this.carCards = carCards
+        this.carCards.push(carCard)
         this.minMaxFilter = minValue
         this.state = 'done'
       })

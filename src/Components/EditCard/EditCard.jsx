@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from '@avtopro/modal/dist/index'
 import Button from '@avtopro/button/dist/index'
 import RobotPreloader from '@avtopro/preloader/dist/index'
+import TextInput from '@avtopro/text-input/dist/index'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react-lite'
 import { RootStoreContext } from '../../context/modelContext'
@@ -35,6 +36,7 @@ const EditCard = () => {
   if (modelCardList.state === 'loading') {
     return <RobotPreloader fixed />
   }
+
   return (
     <Modal onClose={() => navigate('/')}>
       <form className="edit__form">
@@ -48,24 +50,25 @@ const EditCard = () => {
         <ul className="create-card__list">
           {modelCardList.card.parts?.map((item) => {
             return (
-              <li key={nanoid()}>
+              <li key={nanoid()} className="edit_parts">
                 {item.tree}{' '}
-                <input
+                <TextInput
                   type="number"
+                  min={0}
                   defaultValue={item.partCount}
                   onChange={(e) => onChange(item, e)}
                 />
-                <button type="button" onClick={() => deletePart(item)}>
+                <Button type="button" onClick={() => deletePart(item)}>
                   Delete
-                </button>
+                </Button>
               </li>
             )
           })}
         </ul>
 
-        <button type="button" onClick={() => modelCardList.updateCard()}>
+        <Button type="button" onClick={() => modelCardList.updateCard()}>
           Submit changes
-        </button>
+        </Button>
       </form>
     </Modal>
   )

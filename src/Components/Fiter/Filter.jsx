@@ -41,6 +41,7 @@ const Filter = ({ modelCardList, modelCar }) => {
       </div>
       <div className="filter__container__select">
         <Select placeholder="Search Model" onChange={(_, newValue) => handleChangeModel(newValue)}>
+          <Option value={''}>All</Option>
           {modelCardList.models.map((item) => {
             return (
               <Option key={item} value={item}>
