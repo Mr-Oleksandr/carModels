@@ -8,6 +8,7 @@ import { RootStoreContext } from '../../context/modelContext'
 import { observer } from 'mobx-react-lite'
 import './LoginForm.css'
 import { useNavigate } from 'react-router-dom'
+import RobotPreloader from '@avtopro/preloader/dist/index'
 
 const LoginForm = () => {
   const [user, setUser] = useState(null)
@@ -36,10 +37,14 @@ const LoginForm = () => {
   const onSubmitLogin = async (e) => {
     e.preventDefault()
     const data = await modelUser.login(user)
+    console.log(data)
     if (data) {
       setItem('jwt', data)
       navigate('/')
     }
+  }
+  if (modelUser.state === 'loading') {
+    return <RobotPreloader />
   }
   return (
     <div className="login__container">

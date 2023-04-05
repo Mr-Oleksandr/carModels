@@ -3,7 +3,7 @@ import { makeAutoObservable, observable, action, runInAction } from 'mobx'
 class ModelUser {
   auth = {}
   user = {}
-  state = 'loading'
+  state = 'done'
   constructor(userService) {
     makeAutoObservable(this, {
       user: observable,
@@ -26,6 +26,7 @@ class ModelUser {
 
   async login(user) {
     try {
+      this.state = 'loading'
       const { jwt } = await this.userService.login(user)
       runInAction(() => {
         this.user = jwt
