@@ -2,6 +2,7 @@ import React from 'react'
 import './Card.css'
 import PropTypes from 'prop-types'
 import ItemCard from '@avtopro/item-card/dist/index'
+import Button from '@avtopro/button/dist/index'
 import { nanoid } from 'nanoid'
 import { Link } from 'react-router-dom'
 
@@ -16,21 +17,23 @@ const Card = ({
   return (
     <ItemCard
       className="card"
+      controls={
+        <Button
+          style={{
+            backgroundColor: '#418aca',
+            border: 'none',
+            color: 'white',
+            borderRadius: '2px'
+          }}>
+          <Link style={{ textDecoration: 'none', color: 'white' }} to={`/edit/${id}`}>
+            Edit
+          </Link>
+        </Button>
+      }
       title={
         <span>
           {modelName} <br />
           {dateRange} {engineType} {mileage}km <br />
-          <button
-            style={{
-              width: '50px',
-              height: '25px',
-              backgroundColor: '#418aca',
-              border: 'none',
-              color: 'white',
-              borderRadius: '2px'
-            }}>
-            <Link to={`/edit/${id}`}>Edit</Link>
-          </button>
         </span>
       }>
       {parts.map((item) => {

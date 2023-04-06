@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite'
 import { toJS } from 'mobx'
 import { useContext } from 'react'
 import { RootStoreContext } from '../../../context/modelContext'
-
 const SelectModelComplectation = ({ setValue, value }) => {
   const {
     model: { modelCar }
